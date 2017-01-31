@@ -438,6 +438,17 @@ export default Component.extend({
     },
 
     /**
+     * onRowHover action - sent when a row is hovered over.
+     *
+     * @event onRowHover
+     * @param {Row} row The row that was hovered
+     * @param {Event} event The hover event
+     */
+    onRowHover(/* row */) {
+      this.sendAction('onRowHover', ...arguments);
+    },
+
+    /**
      * onScroll action - sent when user scrolls
      *
      * This only works when `useVirtualScrollbar` is `true`, i.e. when you are

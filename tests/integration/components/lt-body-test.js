@@ -102,6 +102,19 @@ test('row selection - click to modify selection', function(assert) {
   assert.equal(this.$('tr.is-selected').length, 5, 'clicking a deselected row selects it without affecting other selected rows');
 });
 
+test('row hover', function(assert) {
+  this.set('table', new Table(Columns, createUsers(5)));
+  this.on('hoverRow', (row) => {
+    assert.ok(row, 'onHoverRow triggered');
+  });
+  this.render(hbs `{{lt-body table=table sharedOptions=sharedOptions onRowHover=(action 'hoverRow')}}`);
+
+  let firstRow = this.$('tr:first');
+  let element = firstRow.get(0);
+  let event = new window.Event('mouseover');
+  element.dispatchEvent(event);
+});
+
 test('row expansion', function(assert) {
   this.set('table', new Table(Columns, createUsers(2)));
   this.set('canExpand', false);
